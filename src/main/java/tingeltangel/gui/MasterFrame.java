@@ -1,7 +1,6 @@
 
 package tingeltangel.gui;
 
-import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -11,15 +10,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.LinkedList;
+
 import javax.swing.JDesktopPane;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
 import tingeltangel.Tingeltangel;
 import tingeltangel.core.Book;
 import tingeltangel.core.Books;
@@ -28,6 +25,7 @@ import tingeltangel.core.Entry;
 import tingeltangel.core.Importer;
 import tingeltangel.core.MP3Player;
 import tingeltangel.core.NoBookException;
+import tingeltangel.core.Tools;
 import tingeltangel.core.Translator;
 import tingeltangel.core.scripting.SyntaxError;
 
@@ -207,10 +205,7 @@ public class MasterFrame extends JFrame implements MenuCallback {
                         Integer[] ids = Books.getIDs();
                         options = new String[ids.length];
                         for(int i = 0; i < ids.length; i++) {
-                            String m = Integer.toString(ids[i]);
-                            while(m.length() < 5) {
-                                m = "0" + m;
-                            }
+                            String m=Tools.addPadding(ids[i]);
                             m += " " + Books.getBook(ids[i]).get("Name");
                             m += " (" + Books.getBook(ids[i]).get("Author") + ")";
                             options[i] = m;

@@ -547,17 +547,12 @@ public class Book {
             }
         }
         
-        String idS = "" + id;
-        while(idS.length() < 5) {
-            idS = "0" + idS;
-        }
-        
-        File ouf = new File(dir, idS + OufFile._EN_OUF);
-        File png = new File(dir, idS + PngFile._EN_PNG);
-        File src = new File(dir, idS + ScriptFile._EN_SRC);
-        
-        // TODO use propert png file
-        InputStream fci = new FileInputStream("sample.png");
+        String idString=Tools.addPadding(id);        
+        File ouf = new File(dir, idString + OufFile._EN_OUF);
+        File png = new File(dir, idString + PngFile._EN_PNG);
+        File src = new File(dir, idString + ScriptFile._EN_SRC);
+                
+        InputStream fci = new FileInputStream(new File(this.dir + "\\tmp", idString + PngFile._EN_PNG));
         OutputStream fco = new FileOutputStream(png);
         int b;
         byte[] buffer = new byte[4096];
@@ -577,8 +572,7 @@ public class Book {
         generateOufFile(out);
         out.close();
         
-        PrintWriter txt = new PrintWriter(new FileWriter(new File(dir, idS + TxtFile._EN_TXT)));
-        
+        PrintWriter txt = new PrintWriter(new FileWriter(new File(dir, idString + TxtFile._EN_TXT)));
         
         txt.println("Name: " + name.trim());
         txt.println("Publisher: " + publisher.trim());

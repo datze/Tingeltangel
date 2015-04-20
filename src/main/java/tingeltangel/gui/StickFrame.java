@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
@@ -22,9 +23,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
 import tingeltangel.core.Book;
 import tingeltangel.core.Books;
 import tingeltangel.core.Stick;
+import tingeltangel.core.Tools;
 import tingeltangel.core.scripting.SyntaxError;
 
 public class StickFrame extends JInternalFrame implements ActionListener {
@@ -292,10 +295,7 @@ public class StickFrame extends JInternalFrame implements ActionListener {
         Integer[] ids = Books.getIDs();
         String[] options = new String[ids.length];
         for(int i = 0; i < ids.length; i++) {
-            String m = Integer.toString(ids[i]);
-            while(m.length() < 5) {
-                m = "0" + m;
-            }
+            String m=Tools.addPadding(ids[i]);
             m += " " + Books.getBook(ids[i]).get("Name");
             m += " (" + Books.getBook(ids[i]).get("Author") + ")";
             options[i] = m;
@@ -361,10 +361,7 @@ public class StickFrame extends JInternalFrame implements ActionListener {
         int i = 0;
         while(ids.hasNext()) {
             int id = ids.next();
-            String m = Integer.toString(id);
-            while(m.length() < 5) {
-                m = "0" + m;
-            }
+            String m=Tools.addPadding(id);
             m += " " + Books.getBook(id).get("Name");
             m += " (" + Books.getBook(id).get("Author") + ")";
             options[i++] = m;
@@ -390,10 +387,7 @@ public class StickFrame extends JInternalFrame implements ActionListener {
         int i = 0;
         while(ids.hasNext()) {
             int id = ids.next();
-            String m = Integer.toString(id);
-            while(m.length() < 5) {
-                m = "0" + m;
-            }
+            String m=Tools.addPadding(id);
             m += " " + Books.getBook(id).get("Name");
             m += " (" + Books.getBook(id).get("Author") + ")";
             options[i++] = m;

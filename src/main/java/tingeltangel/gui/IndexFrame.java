@@ -11,12 +11,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Iterator;
-import javax.swing.DefaultCellEditor;
+
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
@@ -31,9 +29,11 @@ import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
+
 import tingeltangel.core.Book;
 import tingeltangel.core.Entry;
 import tingeltangel.core.NoBookException;
+import tingeltangel.core.Tools;
 import tingeltangel.core.Translator;
 
 
@@ -125,10 +125,7 @@ public class IndexFrame extends JInternalFrame implements ActionListener {
                     if(column == 0) {
                         
                         // click on oid
-                        String _id = Integer.toString(book.getEntry(row).getTingID());
-                        while(_id.length() < 5) {
-                            _id = "0" + _id;
-                        }
+                        String _id=Tools.addPadding(book.getEntry(row).getTingID());
                         JFileChooser fc = new JFileChooser();
                         fc.setFileFilter(new FileNameExtensionFilter("Tabelle (*.eps)", "eps"));
                         fc.setSelectedFile(new File(_id + ".eps"));

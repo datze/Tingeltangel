@@ -30,10 +30,7 @@ public class Importer {
         //File hexDir = new File(path, "hex");
         //hexDir.mkdir();
         
-        String _id = Integer.toString(id);
-        while(_id.length() < 5) {
-            _id = "0" + _id;
-        }
+        String _id=Tools.addPadding(id);
         
         Stick.downloadOfficial(tmpDir, id);
         DataInputStream ouf = new DataInputStream(new FileInputStream(new File(tmpDir, _id + OufFile._EN_OUF)));
@@ -196,10 +193,7 @@ public class Importer {
             
             OutputStream out;
             
-            String _eid = Integer.toString(e[3]);
-            while(_eid.length() < 5) {
-                _eid = "0" + _eid;
-            }
+            String _eid=Tools.addPadding(e[3]);
             
             // book.add e to index table
             book.addEntry(e[3]);

@@ -117,10 +117,7 @@ public class Stick {
         Iterator<Integer> i = getBooks(path).iterator();
         while(i.hasNext()) {
             int id = i.next();
-            String bookID = Integer.toString(id);
-            while(bookID.length() < 5) {
-                bookID = "0" + bookID;
-            }
+            String bookID=Tools.addPadding(id);
             HashMap<String, String> book = Books.getBook(id);
             if(book == null) {
                 buffer.append(bookID).append("\n");

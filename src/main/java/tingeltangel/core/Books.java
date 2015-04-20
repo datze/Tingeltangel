@@ -102,10 +102,7 @@ public class Books {
             InputStream in = null;
             OutputStream out = null;
             try {
-                String _id = Integer.toString(id);
-                while(_id.length() < 5) {
-                    _id = "0" + _id;
-                }
+            	String _id=Tools.addPadding(id);
                 in = new URL(Tingeltangel.BASE_URL + "/get-description/id/" + _id + "/area/en").openStream();
                 out = new FileOutputStream(new File(new File("books"), _id + TxtFile._EN_TXT));
                 
@@ -226,10 +223,7 @@ public class Books {
         for(int r = 0; r < ids.length; r++) {
             int id = ids[r];
             
-            String _id = Integer.toString(id);
-            while(_id.length() < 5) {
-                _id = "0" + _id;
-            }
+            String _id=Tools.addPadding(id);
             InputStream in = new URL(Tingeltangel.BASE_URL + "/get-description/id/" + _id + "/area/en").openStream();
             OutputStream out = new FileOutputStream(new File(new File("books"), _id + TxtFile._EN_TXT));
 
@@ -251,10 +245,7 @@ public class Books {
         System.out.println("^ Buch ID ^ Name ^ Herausgeber ^ Autor ^ Version ^ URL ^ Ländercode ^ Downloads ^^^^");
         for(int i = 0; i < ids.length; i++) {
             HashMap<String, String> book = Books.getBook(ids[i]);
-            String id = Integer.toString(ids[i]);
-            while(id.length() < 5) {
-                id = "0" + id;
-            }
+            String id=Tools.addPadding(ids[i]);
             System.out.print("| " + id + " | " + book.get("Name") + " | ");
             System.out.print(book.get("Publisher") + " | " + book.get("Author") + " | ");
             System.out.print(book.get("Version") + " | " + book.get("URL") + " | " + book.get("Area Code") + " | ");

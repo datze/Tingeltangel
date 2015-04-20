@@ -173,10 +173,15 @@ public class Tools {
             binaryCallback.callback(null);
             
         }
-        
-        
-        
     }
-    
+
+    /**
+     * Adds leading padding with zeros to id
+     * @param id the id
+     * @return the padded id (length=5)
+     */
+    public static String addPadding(int id) {
+    	return String.format("%05d", id);
+    }
     
 }

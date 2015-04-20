@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
+
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -13,8 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
 import tingeltangel.core.Book;
 import tingeltangel.core.Books;
+import tingeltangel.core.Tools;
 import tingeltangel.core.Translator;
 
 public class PropertyFrame extends JInternalFrame {
@@ -113,10 +116,7 @@ public class PropertyFrame extends JInternalFrame {
                                 Integer[] ids = Books.getIDs();
                                 options = new String[ids.length];
                                 for(int i = 0; i < ids.length; i++) {
-                                    String m = Integer.toString(ids[i]);
-                                    while(m.length() < 5) {
-                                        m = "0" + m;
-                                    }
+                                    String m=Tools.addPadding(ids[i]);
                                     m += " " + Books.getBook(ids[i]).get("Name");
                                     m += " (" + Books.getBook(ids[i]).get("Author") + ")";
                                     options[i] = m;
@@ -137,10 +137,7 @@ public class PropertyFrame extends JInternalFrame {
                                         
                                 options = new String[ids.length];
                                 for(int i = 0; i < ids.length; i++) {
-                                    String m = Integer.toString(ids[i]);
-                                    while(m.length() < 5) {
-                                        m = "0" + m;
-                                    }
+                                    String m=Tools.addPadding(ids[i]);
                                     options[i] = m;
                                 }
                                 
@@ -155,10 +152,7 @@ public class PropertyFrame extends JInternalFrame {
                                 
                                 options = new String[ids.length];
                                 for(int i = 0; i < ids.length; i++) {
-                                    String m = Integer.toString(ids[i]);
-                                    while(m.length() < 5) {
-                                        m = "0" + m;
-                                    }
+                                    String m=Tools.addPadding(ids[i]);
                                     options[i] = m;
                                 }
                                 
