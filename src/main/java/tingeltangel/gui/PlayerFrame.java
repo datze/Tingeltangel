@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -12,8 +13,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
 import tingeltangel.core.Book;
 import tingeltangel.core.Entry;
+import tingeltangel.core.Properties;
 import tingeltangel.core.Translator;
 import tingeltangel.core.scripting.SyntaxError;
 
@@ -26,6 +29,7 @@ public class PlayerFrame extends JInternalFrame implements EntryListener, Action
     private JLabel tingID = new JLabel();
     private JLabel codeID = new JLabel();
     private JTextArea playlist = new JTextArea();
+	private boolean buttonsEnabled;
     
     public PlayerFrame(Book book, final MasterFrame frame) {
         super("Player", true, true, true, true);
@@ -33,6 +37,8 @@ public class PlayerFrame extends JInternalFrame implements EntryListener, Action
         setVisible(true);
         setBounds(610, 160, 300, 180);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
+        
+        buttonsEnabled = Properties.getPropertyAsBoolean(Properties.WIN_MPG123+Properties._ENABLED);
         
         JPanel buttons = new JPanel();
         buttons.setLayout(new GridLayout(1, 3));
@@ -44,6 +50,9 @@ public class PlayerFrame extends JInternalFrame implements EntryListener, Action
         stop.setActionCommand("stop");
         stop.addActionListener(this);
         buttons.add(stop);
+        buttons.setEnabled(buttonsEnabled);
+        stop.setEnabled(buttonsEnabled);
+        play.setEnabled(buttonsEnabled);
         
         JPanel props = new JPanel();
         props.setLayout(new GridLayout(4, 2));
@@ -61,6 +70,7 @@ public class PlayerFrame extends JInternalFrame implements EntryListener, Action
         panel.add(props, BorderLayout.NORTH);
         panel.add(new JScrollPane(playlist), BorderLayout.CENTER);
         panel.add(buttons, BorderLayout.SOUTH);
+        playlist.setEnabled(false);
         
         setContentPane(panel);
         frame.getMP3Player().addActionListener(new ActionListener() {

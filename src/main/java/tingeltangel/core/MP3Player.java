@@ -34,24 +34,29 @@ public class MP3Player {
     public void addActionListener(ActionListener listener) {
         listeners.add(listener);
     }
-    
+
     private void playlistChanged() {
         Iterator<ActionListener> i = listeners.iterator();
         while(i.hasNext()) {
             i.next().actionPerformed(null);
         }
     }
-    
+
     public void add(File file, String hint) {
-        System.out.println("mp3 player: add to playlist " + file.getAbsolutePath());
-        _add(new PlaylistEntry(file, hint));
-        playlistChanged();
-        new Thread() {
-            @Override
-            public void run() {
-                play();
-            }
-        }.start();
+    	boolean enabled = Properties.getPropertyAsBoolean(Properties.WIN_MPG123+Properties._ENABLED);
+    	if(!enabled) {
+    		System.out.println("mp3 player: mpg123 required to play " + file.getAbsolutePath());
+    	} else {
+	        System.out.println("mp3 player: add to playlist " + file.getAbsolutePath());
+	        _add(new PlaylistEntry(file, hint));
+	        playlistChanged();
+	        new Thread() {
+	            @Override
+	            public void run() {
+	                play();
+	            }
+	        }.start();
+    	}
     }
     
     public void addPause(int ms) {

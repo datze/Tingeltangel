@@ -94,7 +94,7 @@ public class Tools {
             
             if(Properties.getProperty(propertyName + Properties._PATH) != null) {
                                 
-                if(Properties.getPropertyAsInteger(propertyName + Properties._ENABLED) == 0) {
+                if(!Properties.getPropertyAsBoolean(propertyName + Properties._ENABLED)) {
                     binaryCallback.callback(null);
                 } else {
                 

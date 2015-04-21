@@ -72,9 +72,11 @@ public class Properties {
         return(PROPERTIES.get(name.trim()));
     }
     
-    public static int getPropertyAsInteger(String name) {
+    public static boolean getPropertyAsBoolean(String name) {
         try {
-            return(Integer.parseInt(PROPERTIES.get(name)));
+            String property = PROPERTIES.get(name);
+			return Integer.parseInt(property)==1 || Boolean
+            		.parseBoolean(property);
         } catch(NumberFormatException nfe) {
             throw new Error("property '" + name.trim() + "' is not of type int");
         }
